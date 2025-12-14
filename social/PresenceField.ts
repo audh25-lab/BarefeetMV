@@ -1,5 +1,8 @@
 export class PresenceField {
-  sense(userId: string) {
-    return `${userId} is emotionally nearby`
+  sense(userA: string, userB: string) {
+    return {
+      resonance: Math.random(),
+      message: "You are aligned in thought right now"
+    }
   }
 }
