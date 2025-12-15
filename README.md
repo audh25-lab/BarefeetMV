@@ -1,6 +1,6 @@
 # BarefeetMV 👣
 
-Next.js 14 application using the App Router.
+A playful learning web app for kids built with Next.js 14.
 
 ## Run locally
 ```bash
