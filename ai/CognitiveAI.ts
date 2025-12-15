@@ -15,7 +15,6 @@ export class CognitiveAI {
     this.emotion.update(event)
 
     return {
-      companion: this.name,
       response: this.learner.adapt(subject, age),
       emotion: this.emotion.snapshot()
     }
