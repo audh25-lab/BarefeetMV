@@ -1,14 +1,14 @@
-import { CognitiveAI } from "../ai/CognitiveAI"
+import Link from "next/link"
 
-export default function Page() {
-  const ai = new CognitiveAI("Barefeet", "Maldivian", "en")
-  const result = ai.interact("happy", "letters", 6)
-
+export default function Home() {
   return (
-    <main style={{ padding: 24 }}>
+    <main>
       <h1>BarefeetMV 👣</h1>
-      <p>{result.response}</p>
-      <small>Mood: {result.emotion.mood}</small>
+      <p>A playful learning world for kids.</p>
+
+      <Link href="/play">
+        <button>Start Learning</button>
+      </Link>
     </main>
   )
 }
