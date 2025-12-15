@@ -1,18 +1,6 @@
-<<<<<<< HEAD
-# dependencies
 node_modules/
-
-# next.js
 .next/
 out/
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# env
 .env*
-=======
-node_modules
->>>>>>> be57930 (git push origin main)
+npm-debug.log*
+yarn-error.log*
