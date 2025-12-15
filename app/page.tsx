@@ -1,14 +1,21 @@
-import Link from "next/link"
+"use client"
+
+import { setUserState } from "../lib/state"
 
 export default function Home() {
+  function start(age: number) {
+    setUserState({ age, language: "en" })
+    window.location.href = "/play"
+  }
+
   return (
     <main>
       <h1>BarefeetMV 👣</h1>
-      <p>A playful learning world for kids.</p>
+      <p>Choose your age to begin:</p>
 
-      <Link href="/play">
-        <button>Start Learning</button>
-      </Link>
+      <button onClick={() => start(4)}>Ages 3–5</button>
+      <br /><br />
+      <button onClick={() => start(7)}>Ages 6–9</button>
     </main>
   )
 }
