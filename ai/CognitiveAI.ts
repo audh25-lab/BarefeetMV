@@ -1,5 +1,5 @@
 import { EmotionalModel } from "./EmotionalModel"
-import { LearningAdapter } from "./LearningAdapter"
+import LearningAdapter from "./LearningAdapter"
 
 export class CognitiveAI {
   emotion = new EmotionalModel()
