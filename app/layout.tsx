@@ -1,6 +1,8 @@
+import "./globals.css"
+
 export const metadata = {
   title: "BarefeetMV",
-  description: "BarefeetMV"
+  description: "A playful learning world for kids"
 }
 
 export default function RootLayout({
