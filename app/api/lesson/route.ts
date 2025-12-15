@@ -2,13 +2,19 @@ import { NextRequest, NextResponse } from "next/server"
 
 export const runtime = "edge"
 
+type LessonRequest = {
+  world: string
+  age: number
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { world, age } = await req.json()
+    const body = (await req.json()) as LessonRequest
+    const { world, age } = body
 
-    if (!world || !age) {
+    if (!world || typeof age !== "number") {
       return NextResponse.json(
-        { error: "Missing world or age" },
+        { error: "Missing or invalid world or age" },
         { status: 400 }
       )
     }
@@ -27,38 +33,44 @@ Rules:
 - Encourage curiosity
 `
 
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }],
-        temperature: 0.7
-      })
-    })
+    const res = await fetch(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+        },
+        body: JSON.stringify({
+          model: "gpt-4o-mini",
+          messages: [
+            { role: "user", content: prompt }
+          ],
+          temperature: 0.7
+        })
+      }
+    )
 
     if (!res.ok) {
       const err = await res.text()
       return NextResponse.json(
-        { error: "LLM error", details: err },
+        { error: "LLM request failed", details: err },
         { status: 500 }
       )
     }
 
     const data = await res.json()
-    const content = data.choices?.[0]?.message?.content ?? ""
+    const lesson =
+      data?.choices?.[0]?.message?.content ?? ""
 
     return NextResponse.json({
       world,
       age,
-      lesson: content
+      lesson
     })
-  } catch (e) {
+  } catch (error) {
     return NextResponse.json(
-      { error: "Server error" },
+      { error: "Unexpected server error" },
       { status: 500 }
     )
   }
