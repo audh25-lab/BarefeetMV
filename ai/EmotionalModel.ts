@@ -4,7 +4,6 @@ export class EmotionalModel {
   update(event: string) {
     if (event.includes("happy")) this.state = "happy"
     else if (event.includes("sad")) this.state = "sad"
-    else if (event.includes("excited")) this.state = "excited"
     else this.state = "neutral"
   }
 
